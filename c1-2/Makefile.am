@@ -1,0 +1,8 @@
+AUTOMAKE_OPTIONS	= foreign
+ACLOCAL_AMFLAGS		= -I m4
+
+bin_PROGRAMS		= c1-2
+c1_2_SOURCES		= c1-2.c
+
+c1_2_CFLAGS		= @CFLAGS@
+c1_2_LDADD		= @LIBS@
