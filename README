@@ -1,0 +1,17 @@
+OpenGLWorks - some examples of OpenGL
+
+Reference:
+  OpenGLによる3次元CGプログラミング
+  http://www.res.kutc.kansai-u.ac.jp/~hayashi/cg3d/
+
+OpenGLによる入門用のプログラムをaucoconfでまとめたものです
+
+環境
+  ・WindowsならばMinGW/CygwinのようなUNIX環境とautotoolsが必要です
+  ・Linux/Mac OS Xについても同様
+  ・上記に加えてOpenGL/GLUTが必要です
+
+ビルド
+  $ ./bootstrap
+  $ ./configure
+  $ make
