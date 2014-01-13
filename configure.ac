@@ -80,5 +80,6 @@ AC_CONFIG_FILES([Makefile
                  c1-1/Makefile
                  c1-2/Makefile
                  oct/Makefile
-                 round/Makefile])
+                 round/Makefile
+		 vertex-array/Makefile])
 AC_OUTPUT

@@ -1,5 +1,5 @@
 # subdirectories
-SUBDIRS = c1-1 c1-2 oct round
+SUBDIRS = c1-1 c1-2 oct round vertex-array
 
 # chain with ChangeLog
 dist-hook: ChangeLog
