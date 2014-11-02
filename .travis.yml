@@ -8,16 +8,17 @@ compiler:
 
 before_install:
   # gcc 4.8.1
-  - if [ "$CXX" == "gcc" ]; then sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test; fi
+  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
   - sudo apt-get update -qq
 
 install:
   - sudo apt-get install -qq gnulib
   # gcc 4.8.1
-  - if [ "$CC" = "gcc" ]; then sudo apt-get install -qq gcc-4.8; fi
-  - if [ "$CC" = "gcc" ]; then export CXX="gcc-4.8"; fi
+  - sudo apt-get install -qq g++-4.8
   # OpenGL
   - sudo apt-get install freeglut3-dev
+  - export CC="gcc-4.8"
+  - export CXX="g++-4.8"
 
 before_script:
   - autoreconf -i -I/usr/share/gnulib/m4 -I `pwd`/m4
