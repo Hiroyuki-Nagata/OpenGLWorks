@@ -1,21 +1,21 @@
-language: cpp
+language: c
 
 os:
   - linux
 
 compiler:
-  - g++
+  - gcc
 
 before_install:
-  # g++4.8.1
-  - if [ "$CXX" == "g++" ]; then sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test; fi
+  # gcc 4.8.1
+  - if [ "$CXX" == "gcc" ]; then sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test; fi
   - sudo apt-get update -qq
 
 install:
   - sudo apt-get install -qq gnulib
-  # g++4.8.1
-  - if [ "$CXX" = "g++" ]; then sudo apt-get install -qq g++-4.8; fi
-  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8"; fi
+  # gcc 4.8.1
+  - if [ "$CC" = "gcc" ]; then sudo apt-get install -qq gcc-4.8; fi
+  - if [ "$CC" = "gcc" ]; then export CXX="gcc-4.8"; fi
   # OpenGL
   - sudo apt-get install freeglut3-dev
 
