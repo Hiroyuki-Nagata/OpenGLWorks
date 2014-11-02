@@ -1,10 +1,10 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.69])
+AC_PREREQ([2.68])
 AC_INIT([OpenGLWorks], [0.1.1], [newserver002@gmail.com])
 AC_CANONICAL_TARGET
-AM_INIT_AUTOMAKE([])
+AM_INIT_AUTOMAKE
 AC_CONFIG_SRCDIR([c1-1/c1-1.c])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
@@ -50,7 +50,9 @@ if test "$PLATFORM_STRING" = "Apple"; then
 fi
 
 # Checks for header files.
-AC_CHECK_HEADERS([stdlib.h])
+AC_CHECK_HEADERS([GL/glut.h], 
+	     	 [AC_DEFINE(HAVE_GL_GLUT_H)], 
+		 [AC_MSG_ERROR([ERROR: Please install GL/glut.h])])
 
 # Checks for typedefs, structures, and compiler characteristics.
 

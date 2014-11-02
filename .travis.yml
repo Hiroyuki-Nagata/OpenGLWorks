@@ -1,0 +1,34 @@
+language: cpp
+
+os:
+  - linux
+
+compiler:
+  - g++
+
+before_install:
+  # g++4.8.1
+  - if [ "$CXX" == "g++" ]; then sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test; fi
+  - sudo apt-get update -qq
+
+install:
+  - sudo apt-get install -qq gnulib
+  # g++4.8.1
+  - if [ "$CXX" = "g++" ]; then sudo apt-get install -qq g++-4.8; fi
+  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8"; fi
+  # OpenGL
+  - sudo apt-get install freeglut3-dev
+
+before_script:
+  - autoreconf -i -I/usr/share/gnulib/m4 -I `pwd`/m4
+
+script:
+  - ./configure && make
+
+branches:
+  only:
+    - master
+
+notifications:
+  email:
+    - newserver002@gmail.com

@@ -1,9 +1,11 @@
 #!/bin/sh
 
-# create m4 dir if not exist
-if ! test -d m4; then
-    mkdir m4;
+if test `uname -s` = "Darwin"; then
+    glibtoolize --force
+else
+    libtoolize --force
 fi
-
-# exec autoreconf
-autoreconf -vi
+aclocal -I `pwd`/m4
+autoheader
+automake --add-missing
+autoconf
