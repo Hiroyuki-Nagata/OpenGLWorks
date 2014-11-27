@@ -35,3 +35,5 @@ missing
 stamp-h1
 test-driver
 aclocal.m4
+lt*.m4
+libtool.m4

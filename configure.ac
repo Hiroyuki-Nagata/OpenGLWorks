@@ -81,6 +81,7 @@ LDFLAGS="$GL_LDFLAGS $GLU_LDFLAGS $GLUT_LDFLAGS"
 AC_CONFIG_FILES([Makefile
                  c1-1/Makefile
                  c1-2/Makefile
+                 cube/Makefile
                  oct/Makefile
                  round/Makefile
 		 vertex-array/Makefile])

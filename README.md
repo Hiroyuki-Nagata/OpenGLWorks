@@ -9,6 +9,7 @@ OpenGLによる入門用のプログラムを個人的にaucoconfでまとめた
 ### glBegin/glEndで実行される基本的なOpenGLプログラム
    c1-1  
    c1-2  
+   cube  
    round  
    oct  
 
