@@ -1,5 +1,6 @@
 #  OpenGLWorks - some examples of OpenGL
 OpenGLによる入門用のプログラムを個人的にaucoconfでまとめたものです 
+[![Build Status](https://travis-ci.org/Hiroyuki-Nagata/OpenGLWorks.svg?branch=master)](https://travis-ci.org/Hiroyuki-Nagata/OpenGLWorks)  
   
 ## Reference:
   [OpenGLによる3次元CGプログラミング](http://www.res.kutc.kansai-u.ac.jp/~hayashi/cg3d/)  
