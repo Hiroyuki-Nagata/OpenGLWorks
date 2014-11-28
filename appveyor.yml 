@@ -1,58 +1,72 @@
-# appveyor file
-# http://www.appveyor.com/docs/appveyor-yml
+# Based on the example in AppVeyor's docs.
+# Notes:
+#   - Minimal appveyor.yml file is an empty file. All sections are optional.
+#   - Indent each level of configuration with 2 spaces. Do not use tabs!
+#   - All section names are case-sensitive.
+#   - Section names should be unique on each level.
 
-# build version format
-version: "{build}"
+#---------------------------------#
+#      general configuration      #
+#---------------------------------#
 
-# what combinations to test
-environment:
-  matrix:
-    - tbs_arch: "x86"
-      tbs_tools: "mingw"
+# branches to build
+branches:
+  # whitelist
+  only:
+    - master
 
-# Get the stable version of node
+#---------------------------------#
+#    environment configuration    #
+#---------------------------------#
+
+# Operating system (build VM template)
+os: Windows Server 2012
+
+# scripts that are called at very beginning, before repo cloning
+init:
+  - git config --global core.autocrlf input
+
+# clone directory
+clone_folder: c:\projects\net-gd-appveyor
+
+# scripts that run after cloning repository
 install:
-   - cinst mingw-get
-   - set PATH=%PATH%;C:\MinGW\msys\1.0\bin;C:\MinGW\bin
-   - mingw-get install mingw-developer-toolkit
+  - cinst mingw-get
+  - cinst git
+  - set PATH=%PATH%;C:\MinGW\msys\1.0\bin;C:\MinGW\bin
+  - mingw-get install mingw-developer-toolkit
+  - mingw-get install msys-zip
+  - mingw-get install msys-unzip
 
-build: off
+#---------------------------------#
+#       build configuration       #
+#---------------------------------#
 
-# init:
-#   - git config --global core.autocrlf input
+# build platform, i.e. x86, x64, AnyCPU. This setting is optional.
+platform: x86
 
-# platform:
-#   - x86
-#   - x64
+# build Configuration, i.e. Debug, Release, etc.
+configuration: Debug
 
-# environment:
-#   matrix:
-#     - tbs_arch: "x86"
-#       tbs_tools: "mingw"
-#       tbs_static_runtime: 1
-    
-#     - tbs_arch: "x64"
-#       tbs_tools: "mingw"
-#       tbs_static_runtime: 1
+# scripts to run before build
+before_build:
+  - before-build.sh
 
-# install:
-#   # Since the AppVeyor VMs have Git installed, they have MSYS1
-#   - sh --login /c/projects/pipe/scripts/appveyor
-#   - ps: if($env:tbs_arch -eq 'x64') {
-#           $env:vcvar_arg = 'x86_amd64';
-#         }
-#         elseif($env:tbs_arch -eq 'x86') {
-#           $env:vcvar_arg = 'x86';
-#         }  
-#   - cinst mingw-get
-#   - set PATH=%PATH%;C:\MinGW\msys\1.0\bin;C:\MinGW\bin
-#   - mingw-get install mingw-developer-toolkit
+# scripts to run after build
+after_build:
 
-# # to disable automatic builds ( disable MSbuild )
-# build: off
+# to run your custom scripts instead of automatic MSBuild
+build_script: do-build.sh
 
-# # Use MinGW make
-# build_script:
-#   - if [%tbs_tools%]==[mingw] if [%tbs_arch%]==[x86] SET PATH=C:\MinGW\bin;%PATH%
-#   - if [%tbs_tools%]==[mingw] if [%tbs_arch%]==[x64] SET PATH=C:\mingw64\bin;%PATH%
-#   - bash ./bootstrap && bash ./configure && make
+# scripts to run after tests
+after_test:
+
+#---------------------------------#
+#        global handlers          #
+#---------------------------------#
+
+# on successful build
+on_success:
+
+# on build failure
+on_failure:
