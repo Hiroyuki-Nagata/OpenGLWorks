@@ -73,6 +73,25 @@ AX_CHECK_GLU()
 # Checks for glut
 AX_CHECK_GLUT()
 
+# Checks for compiler
+AX_COMPILER_VENDOR
+case "${ax_cv_c_compiler_vendor}" in
+
+   gnu)
+      	AX_CXX_COMPILE_STDCXX_11([noext], [mandatory])
+	;;
+
+   clang)
+	if test "$PLATFORM_STRING" = "Apple"; then
+	   CXXFLAGS="$CXXFLAGS -stdlib=libc++"
+	fi
+	   AX_CXX_COMPILE_STDCXX_11([noext], [mandatory])
+        ;;	
+   *)
+	AC_MSG_ERROR("ERROR: JaneClone cannot compile with gnu gcc or clang.")
+	;;
+esac
+
 # Add Flags
 CFLAGS="-std=c11 $CFLAGS $GL_CFLAGS $GLU_CFLAGS $GLUT_CFLAGS"
 LIBS="$LIBS $GL_LIBS $GLU_LIBS $GLUT_LIBS"
@@ -85,5 +104,6 @@ AC_CONFIG_FILES([Makefile
                  oct/Makefile
                  round/Makefile
 		 vertex-array/Makefile
-		 xmesh/Makefile])
+		 xmesh/Makefile
+		 pmdloader/Makefile])
 AC_OUTPUT

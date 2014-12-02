@@ -1,5 +1,5 @@
 # subdirectories
-SUBDIRS = c1-1 c1-2 cube oct round vertex-array xmesh
+SUBDIRS = c1-1 c1-2 cube oct round vertex-array xmesh pmdloader
 
 # chain with ChangeLog
 dist-hook: ChangeLog
