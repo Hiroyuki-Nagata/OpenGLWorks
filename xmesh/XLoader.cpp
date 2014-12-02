@@ -63,9 +63,9 @@ static bool GetToken(const char* token)
 	GetToken();
 	if ( strcmp(Token, token) != 0 )
 	{
-		cout << "Error : 想定トークンと読込トークンが一致しません\n";
-		cout << "想定トークン：" << token << endl;
-		cout << "読込トークン：" << Token << endl;
+		std::cout << "Error : 想定トークンと読込トークンが一致しません\n";
+		std::cout << "想定トークン：" << token << std::endl;
+		std::cout << "読込トークン：" << Token << std::endl;
 		return false;
 	}
 	return true;
@@ -111,7 +111,7 @@ static void SkipNode()
 	}
 	if ( count > 0 )
 	{
-		cout << "Error : カッコが一致していません\n";
+	     	std::cout << "Error : カッコが一致していません\n";
 		return;
 	}
 }
@@ -515,7 +515,7 @@ void XModel::ComputeBoundingBox()
 // Name : Load()
 // Desc : テキストフォーマットのXファイルをロードする
 //--------------------------------------------------------------------------------------------------
-bool XModel::Load(char *filename)
+bool XModel::Load(const char *filename)
 {
 	//　カウント用変数など	
 	bool b_Mesh = false;
@@ -530,39 +530,26 @@ bool XModel::Load(char *filename)
 	XMesh tempMesh;
 
 	//　ファイルを読み込む
-	HANDLE file = CreateFileA(
-		filename, GENERIC_READ, FILE_SHARE_READ, NULL,
-		OPEN_EXISTING, FILE_ATTRIBUTE_READONLY, NULL);
+	std::ifstream infile;
+	std::streampos fileSize;
 
-	//　チェック
-	if ( file == INVALID_HANDLE_VALUE )
+	infile.open(filename, std::ios::binary);
+	if ( infile.bad() || infile.fail() )
 	{
-		cout << "Error : 指定されたファイルの読み込みに失敗しました\n";
-		cout << "File Name : " << filename << endl;
+		std::cout << "Error : 指定されたファイルの読み込みに失敗しました\n";
+		std::cout << "File Name : " << filename << std::endl;
 		return false;
 	}
 
-	//　ファイルサイズを取得
-	DWORD size = GetFileSize(file, NULL);
-	char* buffer = new char[size+1];
-	buffer[size] = '\0';
+     	infile.seekg(0, std::ios::end);
+     	fileSize = infile.tellg();
+     	infile.seekg(0, std::ios::beg);
 
-	//　バッファに格納
-	DWORD read_size;
-	ReadFile(file, buffer, size, &read_size, NULL);
-
-	//　ファイルを閉じる
-	CloseHandle(file);
-
-	//　サイズチェック
-	if ( read_size != size )
-	{
-		cout << "Error : 読み込みサイズとサイズが一致していません\n";
-		return false;
-	}
+	std::vector<char> temporary(fileSize);
+     	infile.read((char*) &temporary[0], fileSize);
 
 	//　Pointerに読み込んだバッファをセット
-	Pointer = buffer;
+	Pointer = &temporary[0];
 
 	//　ループ
 	while ( *Pointer != '\0' )
@@ -621,7 +608,7 @@ bool XModel::Load(char *filename)
 				SafeDeleteArray(tempFace);
 
 				//　ゼロに戻す
-				ZeroMemory(&tempMesh, sizeof(tempMesh));
+				memset(&tempMesh, 0, sizeof(tempMesh));
 			}
 
 			//　頂点数のカウンターを0に戻す
@@ -645,7 +632,7 @@ bool XModel::Load(char *filename)
 			//　頂点数をチェック
 			if ( tempMesh.numVertices != vertCount )
 			{
-				cout << "Error : 頂点数が一致していません\n";
+				std::cout << "Error : 頂点数が一致していません\n";
 				return false;
 			}
 
@@ -738,14 +725,14 @@ bool XModel::Load(char *filename)
 			//　法線数をチェック
 			if ( tempMesh.numNormals != normCount )
 			{
-				cout << "Error : 法線数が一致していません\n";
+				std::cout << "Error : 法線数が一致していません\n";
 				return false;
 			}
 
 			//　法線インデックス数をチェック
 			if ( GetIntToken() != faceCount )
 			{
-				cout << "Error : 面数と法線インデックス数が一致していません\n";
+				std::cout << "Error : 面数と法線インデックス数が一致していません\n";
 				return false;
 			}
 
@@ -826,7 +813,7 @@ bool XModel::Load(char *filename)
 			//　マテリアル数をチェック
 			if ( GetIntToken() != faceCount )
 			{
-				cout << "Error : 面数とマテリアルリスト数が一致しません\n";
+				std::cout << "Error : 面数とマテリアルリスト数が一致しません\n";
 				return false;
 			}
 

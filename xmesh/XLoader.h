@@ -25,12 +25,43 @@
 //
 // include
 //
-#include <iostream>
-#include <cmath>
-#include <windows.h>
-#include <GL/glut.h>
-using namespace std;
+#ifdef _WIN32
+   #include <windows.h>
+   #include <cstdio>
+   using std::sprintf;
+#else
+   /** Below defination is setting by autoconf later... */
+   #define __USE_POSIX          1   // needed for limits.h
+   #define __USE_XOPEN2K        1
+   #define __STDC_FORMAT_MACROS 1   // needed for unix formatting output
+   #include <cstdio>
+   #include <cstdarg>
+   #include <cstring>
+   #include <unistd.h>
+   #include <limits.h>
+   #include <errno.h>
+   /** DOS to Unix */
+   typedef unsigned long DWORD;
+   typedef void*	 HANDLE;
+#endif
 
+#ifdef _WIN32
+   #if defined(WIN32) && !defined(__MINGW32__) && !defined(__MINGW64__)
+      #define MAX_PATH _MAX_PATH
+   #else  // MSVC
+      #define MAX_PATH FILENAME_MAX
+   #endif // MinGW32,64
+#elif  __unix__
+   #define MAX_PATH _POSIX_PATH_MAX
+#else // Linux/BSD/MacOSX
+   #error "MAX_PATH is undefined"
+#endif
+
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <cmath>
+#include <GL/glut.h>
 //
 // define
 //
@@ -176,7 +207,7 @@ public:
 	XBoundingSphere sphere;
 	XBoundingBox box;
 
-	bool Load(char *filename);
+	bool Load(const char *filename);
 	void Release();
 	void Render(int index, float scale=1.0f);
 	void Render(float scale=1.0f);

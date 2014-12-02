@@ -24,7 +24,7 @@ using namespace std;
 const double PI = 3.14159265358979323846264338327;
 template<class T> static inline T RadToDeg(T rad) { return ( (rad)*(180.0/PI) ); }
 template<class T> static inline T DegToRad(T deg) { return ( (deg)*(PI/180.0) ); }
-typedef enum MState	{ Push, Release, None };
+enum MState { Push, Release, None };
 
 //////////////////////////////////////////////////////////////////////////
 //Å@Å@MPosition class
