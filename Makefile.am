@@ -1,5 +1,5 @@
 # subdirectories
-SUBDIRS = c1-1 c1-2 cube oct round vertex-array
+SUBDIRS = c1-1 c1-2 cube oct round vertex-array xmesh
 
 # chain with ChangeLog
 dist-hook: ChangeLog

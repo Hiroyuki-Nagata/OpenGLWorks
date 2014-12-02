@@ -84,5 +84,6 @@ AC_CONFIG_FILES([Makefile
                  cube/Makefile
                  oct/Makefile
                  round/Makefile
-		 vertex-array/Makefile])
+		 vertex-array/Makefile
+		 xmesh/Makefile])
 AC_OUTPUT

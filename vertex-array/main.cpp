@@ -9,9 +9,13 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #ifdef __APPLE__
-#include <GLUT/glut.h>
+   #include <GLUT/glut.h>
 #else
-#include <GL/glut.h>
+   #include <GL/glut.h>
+#endif
+
+#ifdef __MINGW32__
+   #include "glext.h"
 #endif
 
 #include <iostream>
