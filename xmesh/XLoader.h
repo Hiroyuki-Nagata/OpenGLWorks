@@ -51,7 +51,7 @@
    #else  // MSVC
       #define MAX_PATH FILENAME_MAX
    #endif // MinGW32,64
-#elif  __unix__
+#elif  defined(__unix__) || defined(__APPLE__)
    #define MAX_PATH _POSIX_PATH_MAX
 #else // Linux/BSD/MacOSX
    #error "MAX_PATH is undefined"
