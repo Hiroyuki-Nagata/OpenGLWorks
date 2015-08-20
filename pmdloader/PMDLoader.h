@@ -17,6 +17,16 @@
 #include <GL/glut.h>
 
 //
+// define
+//
+#ifndef _SAFE_DELETE
+#define SafeDelete(x) { if (x) { delete x; x = NULL; } }
+#endif
+#ifndef _SAFE_DELETEARRAY
+#define SafeDeleteArray(x) { if (x) { delete [] x; x = NULL; } }
+#endif
+
+//
 // forward declarations
 //
 class XFace;
@@ -105,7 +115,7 @@ public :
 	char textureFileName[MAX_PATH];
 	XMaterial &operator = (XMaterial &ob);
 	XMaterial();
-	void SetName(char *str);
+	void SetName(const char *str);
 	void SetTextureFileName(char *str);
 };
 
@@ -131,7 +141,7 @@ public :
 	int AddTexCoord(XVector2 &ob);
 	int AddFace(XFace &ob);
 	void Release();
-	void SetName(char *str);
+	void SetName(const char *str);
 };
 
 //
@@ -140,69 +150,85 @@ public :
 class XModel
 {
 private:
-	void ComputeBoundingSphere();
-	void ComputeBoundingBox();
+     void ComputeBoundingSphere();
+     void ComputeBoundingBox();
 
 public:
-	int numMeshes;
-	int numMaterials;
-	XMesh *mesh;
-	XMaterial *material;
-	XBoundingSphere sphere;
-	XBoundingBox box;
+     int numMeshes;
+     int numMaterials;
+     XMesh *mesh;
+     XMaterial *material;
+     XBoundingSphere sphere;
+     XBoundingBox box;
 
-	bool Load(const char *filename);
-	void Release();
-	void Render(int index, float scale=1.0f);
-	void Render(float scale=1.0f);
-	int AddMesh(XMesh ob);
-	int AddMaterial(XMaterial ob);
-	XModel();
-};
+     bool Load(const char *filename);
+     void Release();
+     void Render(int index, float scale=1.0f);
+     void Render(float scale=1.0f);
+     int AddMesh(XMesh ob);
+     int AddMaterial(XMaterial ob);
+     XModel();
+
+     int GetVersion();
+     void SetVersion(int ver);
+
+     const char* GetHeaderString();
+     void SetHeaderString(const char* name);
+
+     const char* GetActor();
+     void SetActor(const char* name );
+
+     int GetVertexChunkSize();
+     void SetVertexChunkSize(int size);
+     PMD_VERTEX_CHUNK& GetVertexChunk();
+
+     int GetIndexChunkSize();
+     void SetIndexChunkSize(int size);
+     PMD_INDEX_CHUNK& GetIndexChunk();
 
 /**
-// Disable Warning C4996
-#ifndef _CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES
-#define _CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES 1
-#endif
-#ifndef _CRT_SECURE_CPP_OVERLOAD_SECURE_NAMES
-#define _CRT_SECURE_CPP_OVERLOAD_SECURE_NAMES 1
-#endif
-#ifndef _CRT_SECURE_NO_WARNINGS
-#define _CRT_SECURE_NO_WARNINGS
-#endif
 
-//
-// include
-//
-#ifdef _WIN32
-   #include <windows.h>
-   #include <cstdio>
-   using std::sprintf;
-#else
-   #define __USE_POSIX          1   // needed for limits.h
-   #define __USE_XOPEN2K        1
-   #define __STDC_FORMAT_MACROS 1   // needed for unix formatting output
-   #include <cstdio>
-   #include <cstdarg>
-   #include <cstring>
-   #include <unistd.h>
-   #include <limits.h>
-   #include <errno.h>
-   typedef unsigned long DWORD;
-   typedef void*	 HANDLE;
-#endif
+     int		GetBoneChunkSize();
+     void	SetBoneChunkSize(int size);
+     PMD_BONE_CHUNK& GetBoneChunk();
 
-//
-// define
-//
-#ifndef _SAFE_DELETE
-#define SafeDelete(x) { if (x) { delete x; x = NULL; } }
-#endif
-#ifndef _SAFE_DELETEARRAY
-#define SafeDeleteArray(x) { if (x) { delete [] x; x = NULL; } }
-#endif
-
+     int		GetIKChunkSize();
+     void	SetIKChunkSize(int size);
+     PMD_IK_CHUNK& GetIKChunk();
 */
+     int GetMaterialChunkSize();
+     void SetMaterialChunkSize(int size);
+     PMD_MATERIAL_CHUNK& GetMaterialChunk();
+/**
+     int		GetMorpChunkSize();
+     void	SetMorpChunkSize(int size);
+     PMD_MORP_CHUNK& GetMorpChunk();
 
-#endif	//Å@_PMD_LOADER_H_
+     int		GetCtrlChunkSize();
+     void	SetCtrlChunkSize(int size);
+     PMD_CTRL_CHUNK& GetCtrlChunk();
+
+     int		GetGrpNameChunkSize();
+     void	SetGrpNameChunkSize(int size);
+     PMD_GRP_NAME_CHUNK& GetGrpNameChunk();
+
+     int		GetGrpChunkSize();
+     void	SetGrpChunkSize(int size);
+     PMD_GRP_CHUNK& GetGrpChunk();
+*/
+public:
+     PMD_HEADER			m_header;
+     PMD_VERTEX_CHUNK		m_vertexs;
+     PMD_INDEX_CHUNK		m_indexs;
+     PMD_MATERIAL_CHUNK		m_materials;
+/**
+     PMD_BONE_CHUNK		m_bones;
+     PMD_IK_CHUNK		m_ikbones;
+     PMD_MORP_CHUNK		m_morps;
+     PMD_CTRL_CHUNK		m_ctrls;
+     PMD_GRP_NAME_CHUNK         m_grp_name;
+     PMD_GRP_CHUNK		m_grp;
+*/
+};
+
+#endif	//„ÄÄ_PMD_LOADER_H_

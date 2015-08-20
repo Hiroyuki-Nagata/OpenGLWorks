@@ -1,15 +1,15 @@
 /*************************************************************************
-@@Mouse.cpp
-@@
-@@Mouse Function Library
+ã€€ã€€Mouse.cpp
+ã€€ã€€
+ã€€ã€€Mouse Function Library
 
-@@Version : 1.0
-@@Date : Nov. 02, 2007
-@@Author : Pocol
+ã€€ã€€Version : 1.0
+ã€€ã€€Date : Nov. 02, 2007
+ã€€ã€€Author : Pocol
 *************************************************************************/
 
 //
-//@includes
+//ã€€includes
 //
 #include <iostream>
 #include <cmath>
@@ -19,7 +19,7 @@ using namespace std;
 
 
 //
-//@global
+//ã€€global
 //
 char axisLabel[3] = { 'x', 'y', 'z' };
 GLfloat axisColor_Red[4] = {1.0, 0.0, 0.0, 1.0};
@@ -30,12 +30,12 @@ GLfloat axisColor_Black[4] = {0.0, 0.0, 0.0, 1.0};
 
 
 ///////////////////////////////////////////////////////////////////////////
-//@@MouseButton class
+//ã€€ã€€MouseButton class
 ///////////////////////////////////////////////////////////////////////////
 
 //------------------------------------------------------------------------------------------------------
-//@@MouseButton
-//@@Desc : ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//ã€€ã€€MouseButton
+//ã€€ã€€Desc : ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //------------------------------------------------------------------------------------------------------
 MouseButton::MouseButton()
 {
@@ -44,8 +44,8 @@ MouseButton::MouseButton()
 
 
 //------------------------------------------------------------------------------------------------------
-//@@~MouseButton
-//@@Desc : ƒfƒXƒgƒ‰ƒNƒ^
+//ã€€ã€€~MouseButton
+//ã€€ã€€Desc : ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //------------------------------------------------------------------------------------------------------
 MouseButton::~MouseButton()
 {
@@ -53,8 +53,8 @@ MouseButton::~MouseButton()
 
 
 //------------------------------------------------------------------------------------------------------
-//@@Reset
-//@@Desc : ƒŠƒZƒbƒg‚·‚é
+//ã€€ã€€Reset
+//ã€€ã€€Desc : ãƒªã‚»ãƒƒãƒˆã™ã‚‹
 //------------------------------------------------------------------------------------------------------
 void MouseButton::Reset()
 {
@@ -68,8 +68,8 @@ void MouseButton::Reset()
 }
 
 //------------------------------------------------------------------------------------------------------
-//@@ConsoleOut
-//@@Desc : ƒRƒ“ƒ\[ƒ‹•\¦
+//ã€€ã€€ConsoleOut
+//ã€€ã€€Desc : ã‚³ãƒ³ã‚½ãƒ¼ãƒ«è¡¨ç¤º
 //-------------------------------------------------------------------------------------------------------
 void MouseButton::ConsoleOut()
 {
@@ -82,12 +82,12 @@ void MouseButton::ConsoleOut()
 }
 
 ///////////////////////////////////////////////////////////////////////////
-//@@ViewCamera
+//ã€€ã€€ViewCamera
 ///////////////////////////////////////////////////////////////////////////
 
 //-------------------------------------------------------------------------------------------------------
-//@@ViewCamera
-//@@Desc : ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//ã€€ã€€ViewCamera
+//ã€€ã€€Desc : ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-------------------------------------------------------------------------------------------------------
 ViewCamera::ViewCamera(double dist)
 {
@@ -96,23 +96,23 @@ ViewCamera::ViewCamera(double dist)
 }
 
 //-------------------------------------------------------------------------------------------------------
-//@@~ViewCamera
-//@@Desc : ƒfƒXƒgƒ‰ƒNƒ^
+//ã€€ã€€~ViewCamera
+//ã€€ã€€Desc : ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-------------------------------------------------------------------------------------------------------
 ViewCamera::~ViewCamera()
 {
 }
 
 //-------------------------------------------------------------------------------------------------------
-//@@MouseMotion
-//@@DescFƒ}ƒEƒX‚ÌˆÚ“®ˆ—
+//ã€€ã€€MouseMotion
+//ã€€ã€€Descï¼šãƒã‚¦ã‚¹ã®ç§»å‹•å‡¦ç†
 //-------------------------------------------------------------------------------------------------------
 void ViewCamera::MouseMotion( int x, int y ) 
 {
-	//@¶ƒ{ƒ^ƒ“‚Ìˆ—
+	//ã€€å·¦ãƒœã‚¿ãƒ³ã®å‡¦ç†
 	if ( left.state == Push )
 	{
-		//@ˆÚ“®—Ê‚ğŒvZ
+		//ã€€ç§»å‹•é‡ã‚’è¨ˆç®—
 		left.current.x = (double)x - left.before.x + left.after.x;
 		left.current.y = (double)y - left.before.y + left.after.y;
 
@@ -123,17 +123,17 @@ void ViewCamera::MouseMotion( int x, int y )
 		angle[1] = DegToRad(angle[1] + left.current.y);
 	}
 
-	//@‰Eƒ{ƒ^ƒ“‚Ìˆ—
+	//ã€€å³ãƒœã‚¿ãƒ³ã®å‡¦ç†
 	if ( right.state == Push )
 	{
 		right.current.x = (double)x - right.before.x + right.after.x;
 		right.current.y  = -(double)y -right.before.y + right.after.y;
 	}
 
-	//@’†ƒ{ƒ^ƒ“‚Ìˆ—
+	//ã€€ä¸­ãƒœã‚¿ãƒ³ã®å‡¦ç†
 	if ( middle.state == Push )
 	{
-		//@ˆÚ“®—Ê‚ğŒvZ
+		//ã€€ç§»å‹•é‡ã‚’è¨ˆç®—
 		middle.current.x = (double)x -middle.before.x + middle.after.x;
 		middle.current.y = (double)y -middle.before.y + middle.after.y;
 		translate[0] = middle.current.x * 0.005;
@@ -143,14 +143,14 @@ void ViewCamera::MouseMotion( int x, int y )
 
 
 //-------------------------------------------------------------------------------------------------------
-//@@MouseInput
-//@@DescFƒ}ƒEƒX‚Ìƒ{ƒ^ƒ“ˆ—
+//ã€€ã€€MouseInput
+//ã€€ã€€Descï¼šãƒã‚¦ã‚¹ã®ãƒœã‚¿ãƒ³å‡¦ç†
 //-------------------------------------------------------------------------------------------------------
 void ViewCamera::MouseInput( int button, int state, int x, int y ) 
 {
 	switch( button )
 	{
-	//@¶ƒ{ƒ^ƒ“
+	//ã€€å·¦ãƒœã‚¿ãƒ³
 	case GLUT_LEFT_BUTTON :
 		if( state == GLUT_DOWN )
 		{
@@ -166,7 +166,7 @@ void ViewCamera::MouseInput( int button, int state, int x, int y )
 		}
 		break;
 
-	//@‰Eƒ{ƒ^ƒ“
+	//ã€€å³ãƒœã‚¿ãƒ³
 	case GLUT_RIGHT_BUTTON :
 		if( state == GLUT_DOWN ) 
 		{ 		
@@ -182,7 +182,7 @@ void ViewCamera::MouseInput( int button, int state, int x, int y )
 		}
 		break;
 
-	//@’†ƒ{ƒ^ƒ“
+	//ã€€ä¸­ãƒœã‚¿ãƒ³
 	case GLUT_MIDDLE_BUTTON :
 		if ( state == GLUT_DOWN )
 		{
@@ -203,8 +203,8 @@ void ViewCamera::MouseInput( int button, int state, int x, int y )
 
 
 //------------------------------------------------------------------------------------------------------
-//@@Reset
-//@@DescFƒpƒ‰ƒ[ƒ^‚ğƒŠƒZƒbƒg‚·‚é
+//ã€€ã€€Reset
+//ã€€ã€€Descï¼šãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’ãƒªã‚»ãƒƒãƒˆã™ã‚‹
 //------------------------------------------------------------------------------------------------------
 void ViewCamera::Reset()
 {
@@ -231,8 +231,8 @@ void ViewCamera::Reset()
 		
 
 //------------------------------------------------------------------------------------------------------
-//@@drawDisk
-//@@Desc:‰~”Õ‚ğ•`‰æ‚·‚é
+//ã€€ã€€drawDisk
+//ã€€ã€€Desc:å††ç›¤ã‚’æç”»ã™ã‚‹
 //------------------------------------------------------------------------------------------------------
 void drawDisk()
 {
@@ -246,27 +246,27 @@ void drawDisk()
 
 
 //------------------------------------------------------------------------------------------------------
-//@@Set
-//@@DescF‹“_‚Ìİ’è
+//ã€€ã€€Set
+//ã€€ã€€Descï¼šè¦–ç‚¹ã®è¨­å®š
 //------------------------------------------------------------------------------------------------------
 void ViewCamera::Set()
 {
 	double zoom = distance;
 	zoom += right.current.y/30.0;
 
-	//@‹“_ˆÊ’u‚ğŒˆ’è
+	//ã€€è¦–ç‚¹ä½ç½®ã‚’æ±ºå®š
 	position[0] = sin(angle[0]) * cos(angle[1]) * zoom;
 	position[1] = sin(angle[1]) * zoom;
 	position[2] = cos(angle[0]) * cos(angle[1]) * zoom;
 
-	//@ƒAƒbƒvƒxƒNƒgƒ‹‚Ìİ’è
+	//ã€€ã‚¢ãƒƒãƒ—ãƒ™ã‚¯ãƒˆãƒ«ã®è¨­å®š
 	if( angle[1] > DegToRad(90.0)  &&  angle[1] < DegToRad(270.0) ) upvector[1] = -1.0;
 	else upvector[1] = 1.0;
 
-	//@•½sˆÚ“®
+	//ã€€å¹³è¡Œç§»å‹•
 	glTranslated( translate[0], translate[1], translate[2] );
 
-	//@‹“_ˆÊ’u‚Ìİ’è
+	//ã€€è¦–ç‚¹ä½ç½®ã®è¨­å®š
 	gluLookAt(
 		position[0], position[1], position[2],
 		target[0], target[1], target[2],
@@ -275,23 +275,23 @@ void ViewCamera::Set()
 }
 
 //------------------------------------------------------------------------------------------------------
-//@@RenderSubAxis
-//@@DescF•â•²‚Ì•`‰æ
+//ã€€ã€€RenderSubAxis
+//ã€€ã€€Descï¼šè£œåŠ©è»¸ã®æç”»
 //------------------------------------------------------------------------------------------------------
 void ViewCamera::RenderSubAxis(int w, int h)
 {
 	const double zoom = 15.0;
 	double eye[3] = {0.0, 0.0, 0.0};
 	
-	//@ƒEƒBƒ“ƒhƒE‘S‘Ì‚ğƒrƒ…[ƒ|[ƒg‚É‚·‚é
+	//ã€€ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦å…¨ä½“ã‚’ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆã«ã™ã‚‹
 	glViewport( w-100, h-100, 100, 100);
 	
-	//@“§‹•ÏŠ·s—ñ‚Ìİ’è
+	//ã€€é€è¦–å¤‰æ›è¡Œåˆ—ã®è¨­å®š
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluPerspective(30.0, 1, 1, 100000.0);
 
-	//@ƒ‚ƒfƒ‹ƒrƒ…[•ÏŠ·‚Ìİ’è
+	//ã€€ãƒ¢ãƒ‡ãƒ«ãƒ“ãƒ¥ãƒ¼å¤‰æ›ã®è¨­å®š
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
@@ -299,13 +299,13 @@ void ViewCamera::RenderSubAxis(int w, int h)
 	eye[1] = sin(angle[1])*zoom;
 	eye[2] = cos(angle[0])*cos(angle[1])*zoom;
 
-	//@‹“_ˆÊ’u‚Ìİ’è
+	//ã€€è¦–ç‚¹ä½ç½®ã®è¨­å®š
 	gluLookAt( 
 		eye[0], eye[1], eye[2],
 		0.0, 0.0, 0.0,
 		upvector[0],upvector[1], upvector[2] );
 
-	//@²‚Ì•¶š
+	//ã€€è»¸ã®æ–‡å­—
 	glPushMatrix();
 	//glDisable(GL_LIGHTING);
 	glColor4fv(axisColor_Black ); 
@@ -319,7 +319,7 @@ void ViewCamera::RenderSubAxis(int w, int h)
 	glPopMatrix();
 	
 
-	//@x²³
+	//ã€€xè»¸æ­£
 	glPushMatrix();
 	glColor4fv(axisColor_Red);
 	glMaterialfv(GL_FRONT, GL_AMBIENT, axisColor_Red);
@@ -331,7 +331,7 @@ void ViewCamera::RenderSubAxis(int w, int h)
 	drawDisk();
 	glPopMatrix();	
 
-	//@y²³
+	//ã€€yè»¸æ­£
 	glPushMatrix();	
 	glColor4fv(axisColor_Green);
 	glMaterialfv(GL_FRONT, GL_AMBIENT, axisColor_Green);
@@ -343,7 +343,7 @@ void ViewCamera::RenderSubAxis(int w, int h)
 	drawDisk();
 	glPopMatrix();
 
-	//@z²³
+	//ã€€zè»¸æ­£
 	glPushMatrix();
 	glColor4fv(axisColor_Blue);
 	glMaterialfv(GL_FRONT, GL_AMBIENT, axisColor_Blue);
@@ -355,7 +355,7 @@ void ViewCamera::RenderSubAxis(int w, int h)
 	drawDisk();
 	glPopMatrix();
 
-	//@ƒLƒ…[ƒu
+	//ã€€ã‚­ãƒ¥ãƒ¼ãƒ–
 	glPushMatrix();
 	glColor4fv(axisColor_Cyan);
 	glMaterialfv(GL_FRONT, GL_AMBIENT, axisColor_Cyan);
@@ -364,7 +364,7 @@ void ViewCamera::RenderSubAxis(int w, int h)
 	glutSolidCube(1.0);
 	glPopMatrix();
 
-	//@x²•‰
+	//ã€€xè»¸è² 
 	glPushMatrix();
 	glTranslated(-1.75, 0.0, 0.0);
 	glRotated(90.0, 0.0, 1.0, 0.0);
@@ -372,7 +372,7 @@ void ViewCamera::RenderSubAxis(int w, int h)
 	drawDisk();
 	glPopMatrix();
 
-	//@y²•‰
+	//ã€€yè»¸è² 
 	glPushMatrix();
 	glTranslated(0.0, -1.75, 0.0);
 	glRotated(-90.0, 1.0, 0.0, 0.0);
@@ -380,7 +380,7 @@ void ViewCamera::RenderSubAxis(int w, int h)
 	drawDisk();
 	glPopMatrix();
 
-	//@z²•‰
+	//ã€€zè»¸è² 
 	glPushMatrix();
 	glTranslated(0.0, 0.0, -1.75);
 	glutSolidCone(0.35, 1.0, 10, 10);

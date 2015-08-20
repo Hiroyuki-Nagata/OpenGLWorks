@@ -12,14 +12,14 @@
 #define _MOUSE_H_INCLUDED_
 
 //
-//　include
+//縲include
 //
 #include <iostream>
 using namespace std;
 
 
 //
-//　global
+//縲global
 //
 const double PI = 3.14159265358979323846264338327;
 template<class T> static inline T RadToDeg(T rad) { return ( (rad)*(180.0/PI) ); }
@@ -27,7 +27,7 @@ template<class T> static inline T DegToRad(T deg) { return ( (deg)*(PI/180.0) );
 enum MState { Push, Release, None };
 
 //////////////////////////////////////////////////////////////////////////
-//　　MPosition class
+//縲縲MPosition class
 //////////////////////////////////////////////////////////////////////////
 class MPosition
 {
@@ -43,7 +43,7 @@ public:
 
 
 //////////////////////////////////////////////////////////////////////////
-//　　MouseButton class
+//縲縲MouseButton class
 //////////////////////////////////////////////////////////////////////////
 class MouseButton
 {
@@ -60,7 +60,7 @@ public:
 };
 
 //////////////////////////////////////////////////////////////////////////
-//　　ViewCamara class
+//縲縲ViewCamara class
 //////////////////////////////////////////////////////////////////////////
 class ViewCamera
 {
@@ -87,4 +87,4 @@ public:
 
 
 
-#endif		//　_MOUSE_WIN_H_INCLUDED_
+#endif		//縲_MOUSE_WIN_H_INCLUDED_

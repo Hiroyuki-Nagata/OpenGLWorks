@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------------------------------------
 // File : Main.cpp
 //
-// Xƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ
+// Xãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿
 //
 // Date : May. 10, 2008
 // Version : 1.0
@@ -23,7 +23,6 @@
 #include <iostream>
 #include "PMDLoader.h"
 #include "Mouse.h"
-using namespace std;
 
 //
 // Global Variable
@@ -32,7 +31,7 @@ int WindowPositionX = 100;
 int WindowPositionY = 100;
 int WindowWidth = 512;
 int WindowHeight = 512;
-const char WindowTitle[] = "PMDƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ";
+const char WindowTitle[] = "PMDloader";
 char Version[50];
 char Vender[50];
 char Renderer[50];
@@ -43,7 +42,7 @@ double CurrentCount = 0.0;
 double LastCount = 0.0;
 int FrameCount = 0;
 float Fps = 0.0f;
-//XModel model;
+XModel model;
 ViewCamera camera;
 
 //
@@ -68,11 +67,11 @@ void glutToggleFullScreen();
 
 //----------------------------------------------------------------------------------------------------
 // Name : main()
-// Desc : ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ÌƒGƒ“ƒgƒŠ[ƒ|ƒCƒ“ƒg
+// Desc : ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã®ã‚¨ãƒ³ãƒˆãƒªãƒ¼ãƒã‚¤ãƒ³ãƒˆ
 //----------------------------------------------------------------------------------------------------
 int main( int argc, char **argv )
 {
-	//@GLUTƒR[ƒ‹ƒoƒbƒNŠÖ”‚È‚Ç‚Ìİ’è
+	//ã€€GLUTã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°ãªã©ã®è¨­å®š
 	glutInit(&argc, argv);
 	glutInitWindowPosition(WindowPositionX, WindowPositionY);
 	glutInitWindowSize(WindowWidth, WindowHeight);
@@ -87,13 +86,13 @@ int main( int argc, char **argv )
 	glutKeyboardFunc(Keyboard);
 	glutSpecialFunc(Special);
 	
-	//@OpenGL‰Šú‰»
+	//ã€€OpenGLåˆæœŸåŒ–
 	Initialize();	
 
-	//@ƒƒCƒ“ƒ‹[ƒv
+	//ã€€ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—
 	glutMainLoop();
 
-	//@Œã•Ğ•t‚¯
+	//ã€€å¾Œç‰‡ä»˜ã‘
 	Shutdown();
 
 	return 0;
@@ -102,7 +101,7 @@ int main( int argc, char **argv )
 
 //----------------------------------------------------------------------------------------------------
 // Name : Initialize()
-// Desc : ‰Šú‰»ˆ—
+// Desc : åˆæœŸåŒ–å‡¦ç†
 //----------------------------------------------------------------------------------------------------
 void Initialize()
 {
@@ -114,21 +113,20 @@ void Initialize()
 	sprintf(Vender, "%s", vender);
 	sprintf(Renderer, "%s", renderer);
 
-	//@ƒJƒEƒ“ƒ^[‚Ì‰Šú‰»
+	//ã€€ã‚«ã‚¦ãƒ³ã‚¿ãƒ¼ã®åˆæœŸåŒ–
 	CurrentCount = LastCount = glutGet(GLUT_ELAPSED_TIME);
 	FrameCount = 0;
 
-	//@ƒ‚ƒfƒ‹ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ
-	#warning "TODO: Implement PMD class loader"
-	// model.Load("Models/dosei.x");
+	//ã€€ãƒ¢ãƒ‡ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿
+	model.Load("Models/HatsuneMiku.pmd");
 
-	//@ƒoƒbƒNƒoƒbƒtƒ@‚ğƒNƒŠƒA‚·‚éF‚Ìw’è
+	//ã€€ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã‚’ã‚¯ãƒªã‚¢ã™ã‚‹è‰²ã®æŒ‡å®š
 	glClearColor(0.3, 0.3, 1.0, 1.0);
 
-	//@[“xƒeƒXƒgON
+	//ã€€æ·±åº¦ãƒ†ã‚¹ãƒˆON
 	glEnable(GL_DEPTH_TEST);
 
-	//@ƒ‰ƒCƒeƒBƒ“ƒO
+	//ã€€ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°
 	float pos[4] = { 0.0f, 10.0f, 10.0f, 1.0f };
 	float amb[4] = { 0.3f, 0.3f, 0.3f, 1.0f };
 	float dif[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
@@ -140,38 +138,38 @@ void Initialize()
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, dif);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, spe);
 
-	//@ƒEƒBƒ“ƒhƒE‚ğ•\¦
+	//ã€€ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’è¡¨ç¤º
 	glutShowWindow();
 }
 
 //---------------------------------------------------------------------------------------------------
 // Name : Idle()
-// Desc : ƒAƒCƒhƒŠƒ“ƒO‚Ìˆ—
+// Desc : ã‚¢ã‚¤ãƒ‰ãƒªãƒ³ã‚°æ™‚ã®å‡¦ç†
 //---------------------------------------------------------------------------------------------------
 void Idle()
 {
-	//@‰É‚È‚ÉÄ•`‰æ
+	//ã€€æš‡ãªæ™‚ã«å†æç”»
 	glutPostRedisplay();
 }
 
 //---------------------------------------------------------------------------------------------------
 // Name : Reshape()
-// Desc : ƒTƒCƒY•ÏX
+// Desc : ã‚µã‚¤ã‚ºå¤‰æ›´
 //---------------------------------------------------------------------------------------------------
 void Reshape(int x, int y)
 {
-	//@ƒEƒBƒ“ƒhƒEƒTƒCƒY‚ğ•Û‘¶
+	//ã€€ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚µã‚¤ã‚ºã‚’ä¿å­˜
 	WindowWidth = x;
 	WindowHeight = y;
 
-	//@ƒTƒCƒYƒ`ƒFƒbƒN
+	//ã€€ã‚µã‚¤ã‚ºãƒã‚§ãƒƒã‚¯
 	if ( WindowWidth < 1 ) WindowWidth = 1;
 	if ( WindowHeight < 1 ) WindowHeight = 1;
 
-	//@ƒrƒ…[ƒ|[ƒg‚Ìİ’è
+	//ã€€ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆã®è¨­å®š
 	glViewport(0, 0, WindowWidth, WindowHeight);
 
-	//@Ë‰es—ñ‚Ìİ’è
+	//ã€€å°„å½±è¡Œåˆ—ã®è¨­å®š
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluPerspective(45.0, 1.0, 0.1, 1000.0);
@@ -179,13 +177,13 @@ void Reshape(int x, int y)
 
 //--------------------------------------------------------------------------------------------------
 // Name : Render2D()
-// Desc : 2ŸŒ³ƒV[ƒ“‚Ì•`‰æ
+// Desc : 2æ¬¡å…ƒã‚·ãƒ¼ãƒ³ã®æç”»
 //--------------------------------------------------------------------------------------------------
 void Render2D()
 {
 	bool isLighting = false;
 
-	//@ŠÔŒv‘ª‚ÆFPSZo
+	//ã€€æ™‚é–“è¨ˆæ¸¬ã¨FPSç®—å‡º
 	CurrentCount = glutGet(GLUT_ELAPSED_TIME);
 	CurrentTime = (CurrentCount - LastCount)/1000.0;
 	FrameCount++;
@@ -197,7 +195,7 @@ void Render2D()
 		LastTime = CurrentTime;
 	}	
 
-	//@3D@¨@2D
+	//ã€€3Dã€€â†’ã€€2D
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity();
@@ -212,7 +210,7 @@ void Render2D()
 		glDisable(GL_LIGHTING);
 	}
 
-	//@•¶š‚Ì•`‰æ
+	//ã€€æ–‡å­—ã®æç”»
 	glColor4f(1.0, 1.0, 1.0, 1.0); 
 	glRasterPos2i(15, 15);
 	glutRenderText(GLUT_BITMAP_HELVETICA_12 , Version);
@@ -229,7 +227,7 @@ void Render2D()
 			glEnable(GL_LIGHTING);
 	}
 
-	//@2D@¨@3D
+	//ã€€2Dã€€â†’ã€€3D
 	glPopMatrix();
 	glLoadIdentity();
 	glMatrixMode(GL_PROJECTION);
@@ -239,45 +237,45 @@ void Render2D()
 
 //--------------------------------------------------------------------------------------------------
 // Name : Render3D()
-// Desc : 3ŸŒ³ƒV[ƒ“‚Ì•`‰æ
+// Desc : 3æ¬¡å…ƒã‚·ãƒ¼ãƒ³ã®æç”»
 //--------------------------------------------------------------------------------------------------
 void Render3D()
 {
-	//@ƒ‚ƒfƒ‹‚Ì•`‰æ
+	//ã€€ãƒ¢ãƒ‡ãƒ«ã®æç”»
         #warning "TODO: Implement PMD class loader"
-     	//float scale = 1.0f/model.sphere.radius;	//@Šg‘åŒW”
-     	//model.Render(scale);	//@•`‰æ
+     	//float scale = 1.0f/model.sphere.radius;	//ã€€æ‹¡å¤§ä¿‚æ•°
+     	//model.Render(scale);	//ã€€æç”»
 }
 
 //---------------------------------------------------------------------------------------------------
 // Name : Display()
-// Desc : ƒEƒBƒ“ƒhƒE‚Ö‚Ì•`‰æ
+// Desc : ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã¸ã®æç”»
 //---------------------------------------------------------------------------------------------------
 void Display()
 {
-	//@ƒoƒbƒNƒoƒbƒtƒ@‚ğƒNƒŠƒA
+	//ã€€ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã‚’ã‚¯ãƒªã‚¢
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	//@ƒ‚ƒfƒ‹ƒrƒ…[s—ñ‚Ìİ’è
+	//ã€€ãƒ¢ãƒ‡ãƒ«ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã®è¨­å®š
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	//@‹“_‚Ìİ’è
+	//ã€€è¦–ç‚¹ã®è¨­å®š
 	camera.Set();
 
 	//
 	glPushMatrix();
 	
-	//@3DƒV[ƒ“‚Ì•`‰æ
+	//ã€€3Dã‚·ãƒ¼ãƒ³ã®æç”»
 	Render3D();	
 
-	//@2DƒV[ƒ“‚Ì•`‰æ
+	//ã€€2Dã‚·ãƒ¼ãƒ³ã®æç”»
 	Render2D();
 
 	//
 	glPopMatrix();
 
-	//@ƒ_ƒuƒ‹ƒoƒbƒtƒ@
+	//ã€€ãƒ€ãƒ–ãƒ«ãƒãƒƒãƒ•ã‚¡
 	glutSwapBuffers();
 
 #if defined(_DEBUG) || defined(DEBUG)
@@ -287,7 +285,7 @@ void Display()
 
 //---------------------------------------------------------------------------------------------------
 // Name : Mouse()
-// Desc : ƒ}ƒEƒXˆ—
+// Desc : ãƒã‚¦ã‚¹å‡¦ç†
 //---------------------------------------------------------------------------------------------------
 void Mouse(int button, int state, int x, int y)
 {
@@ -296,7 +294,7 @@ void Mouse(int button, int state, int x, int y)
 
 //--------------------------------------------------------------------------------------------------
 // Name : Motion()
-// Desc : ƒ}ƒEƒXƒhƒ‰ƒbƒO
+// Desc : ãƒã‚¦ã‚¹ãƒ‰ãƒ©ãƒƒã‚°æ™‚
 //-------------------------------------------------------------------------------------------------
 void Motion(int x, int y)
 {
@@ -305,7 +303,7 @@ void Motion(int x, int y)
 
 //--------------------------------------------------------------------------------------------------
 // Name : PassiveMotion()
-// Desc : ƒ}ƒEƒXˆÚ“®
+// Desc : ãƒã‚¦ã‚¹ç§»å‹•æ™‚
 //--------------------------------------------------------------------------------------------------
 void PassiveMotion(int x, int y)
 {
@@ -313,7 +311,7 @@ void PassiveMotion(int x, int y)
 
 //--------------------------------------------------------------------------------------------------
 // Name : Keyboard()
-// Desc : ƒL[ƒ{[ƒhˆ—
+// Desc : ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰å‡¦ç†
 //--------------------------------------------------------------------------------------------------
 void Keyboard(unsigned char key, int x, int y)
 {
@@ -330,7 +328,7 @@ void Keyboard(unsigned char key, int x, int y)
 
 //--------------------------------------------------------------------------------------------------
 // Name : Special()
-// Desc : “ÁêƒL[ˆ—
+// Desc : ç‰¹æ®Šã‚­ãƒ¼å‡¦ç†
 //--------------------------------------------------------------------------------------------------
 void Special(int key, int x, int y)
 {
@@ -404,7 +402,7 @@ void Special(int key, int x, int y)
 
 //--------------------------------------------------------------------------------------------------
 // Name : Shutdown()
-// Desc : Œã•Ğ•t‚¯
+// Desc : å¾Œç‰‡ä»˜ã‘
 //--------------------------------------------------------------------------------------------------
 void Shutdown()
 {
@@ -412,7 +410,7 @@ void Shutdown()
 
 //--------------------------------------------------------------------------------------------------
 // Name : glutRenderText()
-// Desc : ASCII•¶š—ñ‚Ì•`‰æ
+// Desc : ASCIIæ–‡å­—åˆ—ã®æç”»
 //--------------------------------------------------------------------------------------------------
 void glutRenderText(void* bitmapfont, char*text)
 {
@@ -422,7 +420,7 @@ void glutRenderText(void* bitmapfont, char*text)
 
 //--------------------------------------------------------------------------------------------------
 // Name : glutToggleFullScreen()
-// Desc : ƒtƒ‹ƒXƒNƒŠ[ƒ“‚ÆƒEƒBƒ“ƒhƒEƒ‚[ƒh‚ÌØ‚è‘Ö‚¦
+// Desc : ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã¨ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ¢ãƒ¼ãƒ‰ã®åˆ‡ã‚Šæ›¿ãˆ
 //--------------------------------------------------------------------------------------------------
 void glutToggleFullScreen()
 {
